@@ -21,7 +21,7 @@
   <div class="nav-inner">
     <a class="nav-mark" href="index.html"><span class="dot" aria-hidden="true"></span>Phuc Nguyen</a>
     <nav class="nav-links" id="nav-links">
-      <a href=".index" aria-current="page">Home</a>
+      <a href="index.html" aria-current="page">Home</a>
       <a href="about.html">About</a>
       <a href="projects.html">Projects</a>
       <a href="achievements.html">Achievements</a>
@@ -54,14 +54,18 @@
         </div>
       </div>
       <div class="hero-art">
-        <div class="hero-photos reveal" id="hero-photos">
-          <button type="button" class="hero-photo hero-photo-a" id="hero-photo-a" aria-pressed="true" aria-label="Currently large: presenting on stage. Click to bring the team photo to the front instead.">
+        <div class="hero-photos duo-photos reveal" data-photo-swap>
+          <button type="button" class="hero-photo duo-photo" data-slot="a" aria-pressed="true"
+            data-label-large="Currently large: presenting on stage. Click to bring the team photo to the front instead."
+            data-label-small="Currently small: presenting on stage. Click to bring this photo to the front instead.">
             <img src="assets/img/hero-presenting.jpg" alt="Phuc (Phoebe) Nguyen presenting Amazon Ads solutions on stage with a microphone" width="1000" height="1500" loading="eager">
           </button>
-          <button type="button" class="hero-photo hero-photo-b" id="hero-photo-b" aria-pressed="false" aria-label="Currently small: with the Amazon Ads team at unBoxed on Tour, Shenzhen. Click to bring this photo to the front instead.">
+          <button type="button" class="hero-photo duo-photo" data-slot="b" aria-pressed="false"
+            data-label-large="Currently large: with the Amazon Ads team at unBoxed on Tour, Shenzhen. Click to bring the other photo to the front instead."
+            data-label-small="Currently small: with the Amazon Ads team at unBoxed on Tour, Shenzhen. Click to bring this photo to the front instead.">
             <img src="assets/img/hero-team-shenzhen.jpg" alt="Phuc (Phoebe) Nguyen with Amazon Ads colleagues at the unBoxed on Tour Shenzhen event" width="1000" height="666" loading="lazy">
           </button>
-          <span class="hero-swap-hint" aria-hidden="true">
+          <span class="hero-swap-hint duo-swap-hint" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3"/></svg>
           </span>
         </div>
@@ -169,7 +173,7 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="foot-grid">
-      <a class="nav-mark" href=".html"><span class="dot" aria-hidden="true"></span>Phuc Nguyen</a>
+      <a class="nav-mark" href="index.html"><span class="dot" aria-hidden="true"></span>Phuc Nguyen</a>
       <div class="foot-links">
         <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
