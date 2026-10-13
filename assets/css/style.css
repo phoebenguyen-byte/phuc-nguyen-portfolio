@@ -248,12 +248,17 @@ p { margin: 0; }
 
 .hero-art { position: relative; }
 
-/* ---------- hero photo swap (interactive) ----------
-   Two real photos, one large / one offset-small. Clicking either
-   button swaps which one is large via the .is-swapped state — both
-   size/position and the swap hint are pure CSS transitions. */
-.hero-photos { position: relative; aspect-ratio: 4 / 5; }
-.hero-photo {
+/* ---------- interactive photo-swap pairs (reusable) ----------
+   Generic two-photo collage: one large / one offset-small. Clicking
+   either button swaps which one is large via the .is-swapped state on
+   the wrapper (toggled in main.js by [data-photo-swap] — no IDs, so the
+   same CSS/JS powers both the homepage hero collage (.hero-photos) and
+   any per-project gallery such as the Students Up! event photos
+   (.duo-photos), without the two instances colliding. */
+.hero-photos, .duo-photos { position: relative; }
+.hero-photos { aspect-ratio: 4 / 5; }
+.duo-photos { aspect-ratio: 3 / 2; }
+.hero-photo, .duo-photo {
   position: absolute;
   display: block;
   border: 0;
@@ -268,13 +273,13 @@ p { margin: 0; }
     width 0.45s cubic-bezier(0.4, 0, 0.2, 1), height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
     border-width 0.3s ease, box-shadow 0.35s ease;
 }
-.hero-photo:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
-.hero-photo img {
+.hero-photo:focus-visible, .duo-photo:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+.hero-photo img, .duo-photo img {
   width: 100%; height: 100%; object-fit: cover; display: block;
   pointer-events: none;
   transition: transform 0.4s ease;
 }
-.hero-photo:hover img { transform: scale(1.045); }
+.hero-photo:hover img, .duo-photo:hover img { transform: scale(1.045); }
 
 .hero-photo-a {
   top: 0; left: 0; right: auto; bottom: auto;
@@ -300,21 +305,45 @@ p { margin: 0; }
   box-shadow: 0 30px 60px -25px rgba(17, 17, 17, 0.45);
 }
 
-.hero-swap-hint {
+.duo-photo[data-slot="a"] {
+  top: 0; left: 0; right: auto; bottom: auto;
+  width: 76%; height: 76%; z-index: 1;
+  box-shadow: 0 24px 48px -22px rgba(17, 17, 17, 0.4);
+}
+.duo-photo[data-slot="b"] {
+  top: auto; left: auto; right: 0; bottom: 0;
+  width: 44%; height: 44%; z-index: 2;
+  border: 5px solid var(--paper);
+  box-shadow: 0 16px 32px -16px rgba(17, 17, 17, 0.45);
+}
+.duo-photos.is-swapped .duo-photo[data-slot="a"] {
+  top: auto; left: auto; right: 0; bottom: 0;
+  width: 44%; height: 44%; z-index: 2;
+  border: 5px solid var(--paper);
+  box-shadow: 0 16px 32px -16px rgba(17, 17, 17, 0.45);
+}
+.duo-photos.is-swapped .duo-photo[data-slot="b"] {
+  top: 0; left: 0; right: auto; bottom: auto;
+  width: 76%; height: 76%; z-index: 1;
+  border: 0;
+  box-shadow: 0 24px 48px -22px rgba(17, 17, 17, 0.4);
+}
+
+.hero-swap-hint, .duo-swap-hint {
   position: absolute;
-  right: 42%; bottom: 42%;
   z-index: 3;
-  width: 38px; height: 38px;
   border-radius: 50%;
   background: var(--coral);
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 14px 28px -12px rgba(255, 90, 54, 0.65);
   pointer-events: none;
-  transition: right 0.45s cubic-bezier(0.4, 0, 0.2, 1), bottom 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.hero-swap-hint { right: 42%; bottom: 42%; width: 38px; height: 38px; }
 .hero-swap-hint svg { width: 17px; height: 17px; }
+.duo-swap-hint { right: 38%; bottom: 38%; width: 32px; height: 32px; }
+.duo-swap-hint svg { width: 14px; height: 14px; }
 
-.hero-photo-caption {
+.hero-photo-caption, .duo-photo-caption {
   margin-top: 16px;
   font-family: var(--font-mono);
   font-size: 12px;
@@ -322,7 +351,7 @@ p { margin: 0; }
   letter-spacing: 0.02em;
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-photo, .hero-swap-hint, .hero-photo img { transition: none; }
+  .hero-photo, .duo-photo, .hero-swap-hint, .duo-swap-hint, .hero-photo img, .duo-photo img { transition: none; }
 }
 
 /* ---------- focus areas ---------- */
@@ -487,6 +516,10 @@ details.project-detail[open] summary::after { content: "\2212"; }
 details.project-detail .detail-body { padding: 0 26px 24px; font-size: 14px; color: var(--ink-soft); }
 details.project-detail .detail-body ul { margin: 10px 0 0; padding-left: 18px; }
 details.project-detail .detail-body li { margin-bottom: 6px; }
+
+/* Interactive event-photo gallery nested inside a project's detail panel */
+.detail-body .duo-photos { max-width: 480px; margin-top: 20px; }
+.detail-body .duo-photo-caption { margin-bottom: 4px; }
 
 /* ---------- achievements ---------- */
 .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
